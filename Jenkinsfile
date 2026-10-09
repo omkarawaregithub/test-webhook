@@ -16,18 +16,16 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('Sonarube') {
-                    withCredentials([ 
-                        string( 
-                            credentialsId: 'sonarqube-token', 
-                            variable: 'SONAR_TOKEN' 
-                            ) 
+                withSonarQubeEnv('Sonarqube') {
+                    withCredentials([
+                        string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')
                     ]) {
-                    sh '''
-                        mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-                          -Dsonar.projectKey=webhook-test \
-                          -Dsonar.token="$SONAR_TOKEN"
-                    '''
+                        sh '''
+                            mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+                                -Dsonar.projectKey=webhook-test \
+                                -Dsonar.token="$SONAR_TOKEN"
+                        '''
+                    }
                 }
             }
         }
