@@ -22,7 +22,7 @@ pipeline {
                     ]) {
                         sh '''
                             mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-                                -Dsonar.projectKey=webhook-test \
+                                -Dsonar.projectKey=webhook-test-token \
                                 -Dsonar.token="$SONAR_TOKEN"
                         '''
                     }
